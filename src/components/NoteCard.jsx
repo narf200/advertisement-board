@@ -39,7 +39,7 @@ const useStyles = makeStyles({
         paddingTop: "95.25%" // 16:9
     },
     oldPrice: {
-        textDecoration: "line-through",
+        textDecoration: 'line-through',
         paddingLeft: 8,
     },
     gridCity: {
@@ -97,7 +97,7 @@ function NoteCard({card}) {
                         Просмотрено
                         </Button> : ''}
                     <CardMedia className={classes.cardMedia}
-                               image="https://source.unsplash.com/random"
+                               image="https://source.unsplash.com/random?sig=1"
                                title="some kind of image"
                     />
 

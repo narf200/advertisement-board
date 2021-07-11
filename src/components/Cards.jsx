@@ -23,10 +23,13 @@ const useStyles = makeStyles((theme) => ({
         height:368,
         width: 224,
     },
+    buttonWrap: {
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+    },
     moreButton: {
-        marginLeft: 760,
         color: '#00A0AB'
-
     }
 }));
 
@@ -35,7 +38,7 @@ function Cards() {
     const classes = useStyles();
 
     const [cards, setCards] = useState([]);
-    const [showCards, setShowCards] = useState(15);
+    const [showFirstCards, setShowFirstCards] = useState(15);
     const [isPending, setIsPending] = useState(true);
 
     useEffect(() => {
@@ -48,10 +51,10 @@ function Cards() {
 
     })
 
-    const loadMore = () => ( showCards === 15 ? setShowCards(cards.length) : setShowCards(15) )
+    const loadMore = () => ( showFirstCards === 15 ? setShowFirstCards(cards.length) : setShowFirstCards(15) )
 
     return (
-        <Container className={classes.cardGrid} maxWidth="md">
+        <Container className={classes.cardGrid} >
             <Typography className={classes.header}  variant="h6" align="left" color="textPrimary" >
                 Похожие объявления
             </Typography>
@@ -61,16 +64,19 @@ function Cards() {
             >
                 {isPending && <div>Loading...</div>}
                 {cards.map((card, id) => (
-                    id <= showCards ? <Grid  item key={card.id}   xs={12} sm={6} md={4} lg={3} >
+                    id <= showFirstCards ? <Grid  item key={card.id}   xs={12} sm={6} md={4} lg={3} >
                         <NoteCard className={classes.gridItem} card={card}/>
                     </Grid> : ''
                 ))}
             </Grid>
-            <Button
-                onClick={(id, cards)=> loadMore(id, cards)}
-                className={classes.moreButton}
-                endIcon={<KeyboardArrowDown/>}
-            >Показать ещё</Button>
+            <div className={classes.buttonWrap}>
+                <Button
+                    onClick={(id, cards)=> loadMore(id, cards)}
+                    className={classes.moreButton}
+                    endIcon={<KeyboardArrowDown/>}
+                >Показать ещё</Button>
+            </div>
+
         </Container>
     )
 }
