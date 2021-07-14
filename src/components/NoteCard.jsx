@@ -86,6 +86,19 @@ const useStyles = makeStyles({
 
 function NoteCard({card}) {
     const classes = useStyles(card);
+    const timestamp = card.date
+    console.log(timestamp)
+
+    const formatDate = (timestamp) => {
+       let date = new Date(timestamp * 1000)
+        let year = date.getFullYear();
+        let month = ('0' + (date.getMonth() + 1))
+        let day = ( '0' + (date.getDay() + 1));
+        let hours = date.getHours();
+        let minutes = "0" + date.getMinutes();
+        let seconds = "0" + date.getSeconds();
+       return  `${year} ${month} ${day} ${hours}:${minutes.substr(-2)}:${seconds.substr(-2)}`
+    }
 
     return (
         <ThemeProvider theme={customTheme}>
@@ -97,7 +110,7 @@ function NoteCard({card}) {
                         Просмотрено
                         </Button> : ''}
                     <CardMedia className={classes.cardMedia}
-                               image="https://source.unsplash.com/random?sig=1"
+                               image='https://source.unsplash.com/random'
                                title="some kind of image"
                     />
 
@@ -110,7 +123,7 @@ function NoteCard({card}) {
 
 
                     <CardActions className={classes.cardActions} >
-                        <Typography className={classes.oldPrice} variant="subtitle2'" align="left" color="textSecondary">
+                        <Typography className={classes.oldPrice} variant="subtitle2" align="left" color="textSecondary">
                             {card.oldPrice}&nbsp;&#8381;
                         </Typography>
                         <Grid
@@ -150,7 +163,7 @@ function NoteCard({card}) {
                         </Grid>
                         <Grid item >
                             <Typography  className={classes.cityTitle}  color="textSecondary">
-                                {card.oldPrice}
+                                {formatDate(timestamp)}
                             </Typography>
                         </Grid>
                     </Grid>

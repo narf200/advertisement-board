@@ -47,13 +47,16 @@ function Cards() {
             .then(data => {
                 setIsPending(false)
                 setCards(data)
+
             })
 
-    })
+
+    }, [])
 
     const loadMore = () => ( showFirstCards === 15 ? setShowFirstCards(cards.length) : setShowFirstCards(15) )
 
     return (
+
         <Container className={classes.cardGrid} >
             <Typography className={classes.header}  variant="h6" align="left" color="textPrimary" >
                 Похожие объявления
@@ -65,7 +68,7 @@ function Cards() {
                 {isPending && <div>Loading...</div>}
                 {cards.map((card, id) => (
                     id <= showFirstCards ? <Grid  item key={card.id}   xs={12} sm={6} md={4} lg={3} >
-                        <NoteCard className={classes.gridItem} card={card}/>
+                        <NoteCard className={classes.gridItem} card={card} url={card.urls}/>
                     </Grid> : ''
                 ))}
             </Grid>
